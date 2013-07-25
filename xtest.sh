@@ -10,4 +10,5 @@ fi
   && ant -f /opt/xetusbase/xetus/test/build.xml reload-db \
   && sudo chmod -R 777 tmp/ logs/ \
   && ant -f /opt/xetusbase/xetus/test/build.xml \
-  && ~/gitrc/g.sh "$1"
+  && ~/gitrc/g.sh "$1" \
+  && ~/p4rc/p4u.sh
