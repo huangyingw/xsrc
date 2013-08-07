@@ -107,34 +107,6 @@ reloadBranchDB(){
 	
 }
 
-# Do the initial branch setup
-initialBranchSetup(){
-	i=0;
-	REQUIRED_FILES[((i++))]="xetus-config"
-	
-	for ((i = 0; i < ${#REQUIRED_FILES[@]}; i++))
-	do
-		TARGET="/opt/xetusbase/${REQUIRED_FILES[$i]}"
-		if [ ! -e ${TARGET} ]
-		then
-			echo "doing initial branch setup requires $TARGET to exist!" 
-			return 7
-		fi
-	done
-	
-	# We get here, all the required directories exist, so move them over
-	for ((i = 0; i < ${#REQUIRED_FILES[@]}; i++))
-	do
-		SOURCE="/opt/xetusbase/${REQUIRED_FILES[$i]}"
-		TARGET="${BRANCH_XETUS_PATH}/../${REQUIRED_FILES[$i]}"
-		cp -r $SOURCE $TARGET
-		chown -R $REAL_USER $TARGET
-	done
-	
-	cd ${BRANCH_XETUS_PATH}/sql
-	ant "reload-unittest-db"
-}
-
 # Move the symlink for xetusbase over and update the tomcat conf's db name
 swapBranch(){
 	# find the current branch name
