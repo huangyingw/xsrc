@@ -1,2 +1,3 @@
 #!/bin/bash
-tail -f logs/tomcat/xetus-tomcat.log > find.cc
+tail -f /opt/xetusbase/logs/tomcat/xetus-tomcat.log > find.cc
+vi find.cc
