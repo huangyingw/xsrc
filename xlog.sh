@@ -1,3 +1,7 @@
 #!/bin/bash
-tail -f /opt/xetusbase/logs/tomcat/xetus-tomcat.log > find.cc
-vi find.cc
+TARGET=find.cc
+if [ -n "$1" ]
+then
+    TARGET="$1"
+fi
+tail -f /opt/xetusbase/logs/tomcat/xetus-tomcat.log > "${TARGET}"
