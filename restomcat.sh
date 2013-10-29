@@ -1,7 +1,10 @@
 #!/bin/bash
-pid=`ps ax|awk '/xetusbase\/tomcat/{print $1}'`
-if [ -n "$pid" ];
+running_home=`ps ax|grep -o "\ /[U]sers.*/tomcat"|sed -e "s|tomcat||"`
+echo "$running_home"
+if [ -d $running_home ];
 then
-    sudo kill -9 $pid
+    echo restart previous
+    "$running_home"tomcat/bin/xetusone.bash restart
+    "$running_home"tomcat/bin/xetusone.bash stop
 fi
-sudo /opt/systems/bin/xetus-tomcat start
+tomcat/bin/xetusone.bash start

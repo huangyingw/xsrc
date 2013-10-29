@@ -1,8 +1,9 @@
 #!/bin/bash
-pid=`ps ax|awk '/xetusbase\/tomcat/{print $1}'`
-if [ -n "$pid" ];
+running_home=`ps ax|grep -o "\ /[U]sers.*/tomcat"|sed -e "s|tomcat||"`
+if [ -d "$running_home" ];
 then
-    sudo kill -9 $pid
+    "$running_home"tomcat/bin/xetusone.bash restart
+    "$running_home"tomcat/bin/xetusone.bash stop
 fi
-sudo xetus/rebuild.bash -sv \
-    && sudo /opt/systems/bin/xetus-tomcat start
+ant -f xetus/build.xml setup \
+    && tomcat/bin/xetusone.bash restart

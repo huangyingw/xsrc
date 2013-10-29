@@ -5,4 +5,8 @@ then
     TARGET="$1"
 fi
 echo now, begin to log
-tail -f /opt/xetusbase/logs/tomcat/xetus-tomcat.log > "${TARGET}"
+running_home=`ps ax|grep -o "\ /Users.*/tomcat"|awk 'NR==1{print $1}'|sed -e "s|tomcat||"`
+if [ -d "$running_home" ];
+then
+    tail -f "$running_home"logs/xetusone.log > "${TARGET}"
+fi
